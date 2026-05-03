@@ -1,0 +1,20 @@
+# Secrets
+.env
+
+# Cache & index (tự build lại khi chạy)
+data/faiss_k8s_lc/
+data/docs_k8s.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
