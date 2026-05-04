@@ -167,6 +167,39 @@ streamlit run app.py
 
 > First launch: click **Load Index** in the sidebar. Dataset download + FAISS index build takes ~3–5 minutes. Subsequent launches load from disk instantly.
 
+## Evaluation
+
+Run the evaluation script to assess answer quality on 10 test questions:
+
+```bash
+python evaluate.py
+```
+
+The script evaluates each answer on two criteria scored 1–5 by Gemini:
+
+| Criteria | Description |
+|----------|-------------|
+| **Faithfulness** | Does the answer rely on retrieved docs rather than hallucinating? |
+| **Relevance** | Does the answer actually address the question asked? |
+
+### Results
+
+| # | Type | Question | Faithfulness | Relevance |
+|---|------|----------|-------------|-----------|
+| 1 | Troubleshooting | My pod is stuck in CrashLoopBackOff | 4/5 | 5/5 |
+| 2 | Troubleshooting | My pod status is OOMKilled | 1/5 | 1/5 |
+| 3 | Troubleshooting | Pods stuck in Pending state | 2/5 | 4/5 |
+| 4 | Troubleshooting | Pod shows ImagePullBackOff error | 4/5 | 5/5 |
+| 5 | How-to | How do I create a ConfigMap? | 3/5 | 4/5 |
+| 6 | How-to | How do I expose a deployment as a service? | 3/5 | 4/5 |
+| 7 | How-to | How do I get logs from a running pod? | 4/5 | 5/5 |
+| 8 | Concept | What is a Pod in Kubernetes? | 3/5 | 5/5 |
+| 9 | Concept | Deployment vs StatefulSet? | 3/5 | 4/5 |
+| 10 | Concept | What is a Kubernetes namespace? | 2/5 | 5/5 |
+| **Avg** | | | **2.9/5** | **4.2/5** |
+
+> Relevance (4.2/5) indicates the system consistently answers on-topic. Lower Faithfulness (2.9/5) reflects dataset coverage limitations — when retrieval returns relevant docs, Faithfulness reaches 4/5; when docs are unavailable for a topic, the model falls back to general Kubernetes knowledge.
+
 ---
 
 ## Supported Question Types
