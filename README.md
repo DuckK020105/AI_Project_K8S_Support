@@ -120,7 +120,6 @@ flowchart TD
 k8s_rag/
 ├── app.py                  # Streamlit entrypoint
 ├── .env                    # API key (not committed)
-├── .env.example            # Template
 ├── requirements.txt
 ├── config/
 │   └── settings.py         # Reads .env, exposes all config as a singleton
